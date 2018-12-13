@@ -1,0 +1,19 @@
+version: '3'
+services:
+  dumps:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    image: dumps_local
+    volumes:
+      - .:/app
+    ports:
+      - "8000:80"
+    command: python manage.py runserver 0:80
+    depends_on:
+      - redis
+    environment:
+      - REDIS_HOST=redis
+
+  redis:
+    image: redis:3.2
