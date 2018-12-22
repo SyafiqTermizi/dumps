@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_celery_results',
     'rants.apps.RantsConfig',
 ]
 
@@ -122,7 +123,7 @@ STATIC_URL = '/static/'
 
 # CELERY STUFF
 CELERY_BROKER_URL = 'redis://' + str(os.environ.get('REDIS_HOST')) +':6379'
-# CELERY_RESULT_BACKEND = 'redis://' + str(os.environ.get('REDIS_HOST')) +':6379'
+CELERY_RESULT_BACKEND = 'django-db'
 CELERY_ACCEPT_CONTENT = ['application/json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'

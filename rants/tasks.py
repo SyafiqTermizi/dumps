@@ -9,10 +9,9 @@ from config import celery_app
 User = get_user_model()
 logger = get_task_logger(__name__)
 
-@task(name='create_user')
+@celery_app.task(name='create_user')
 def create_user():
     email = 'test@test.com'
-    user = User.objects.create_user(email=email, username=get_random_string(),
-                                    password=get_random_string())
+    User.objects.create_user(email=email, username=get_random_string(),
+                             password=get_random_string())
     logger.info("User Created")
-    return user
